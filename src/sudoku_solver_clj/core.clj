@@ -1,9 +1,19 @@
 (ns sudoku-solver-clj.core
   (:gen-class))
 
+(defn row-for [[x y] board]
+  (nth board y))
+
+(defn column-for [[x y] board]
+  (map #(nth % x) board))
+
+(defn box-for [[x y] board]
+  (let [min-x (* (quot x 3) 3)
+        min-y (* (quot y 3) 3)]
+    (flatten (map #(subvec % min-x (+ min-x 3)) (subvec board min-y (+ min-y 3))))))
+
 (defn solve [board]
-  board
-  )
+  board)
 
 (defn explode-to-ints [string]
   (map #(Character/digit %1 10) string))
