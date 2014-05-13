@@ -6,8 +6,7 @@
   )
 
 (defn explode-to-ints [string]
-  (map #(Character/digit %1 10) string)
-  )
+  (map #(Character/digit %1 10) string))
 
 (defn str-to-grid [string board-size]
   "Converts the input string to a 2-dimensional vector"
