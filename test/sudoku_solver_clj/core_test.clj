@@ -26,10 +26,11 @@
 (defn matches? [grid1 grid2]
   (loop [grid1 grid1
          grid2 grid2]
-    (if (empty? grid1) true)
-    (if (difference-in-non-zero-values? (first grid1) (first grid2))
-      false
-      (recur (rest grid1) (rest grid2)))))
+    (if (empty? grid1)
+      true
+      (if (difference-in-non-zero-values? (first grid1) (first grid2))
+        false
+        (recur (rest grid1) (rest grid2))))))
 
 (defn valid-solution? [solution initial-grid]
   (and (no-zeros? solution) (matches? solution initial-grid)))
