@@ -12,8 +12,27 @@
                   [4 3 0 0 2 0 5 0 1]
                   [6 0 0 3 0 8 9 0 0]])
 
+(defn no-zeros? [grid]
+  (not (some zero? (flatten grid))))
+
+(defn difference-in-non-zero-values? [coll1 coll2]
+  (loop [coll1 coll1
+         coll2 coll2]
+    (if (empty? coll1) false)
+    (if (and (not= (first coll1) 0) (not= (first coll1) (first coll2)))
+      false
+      (recur (rest coll1) (rest coll2)))))
+
+(defn matches? [grid1 grid2]
+  (loop [grid1 grid1
+         grid2 grid2]
+    (if (empty? grid1) true)
+    (if (difference-in-non-zero-values? (first grid1) (first grid2))
+      false
+      (recur (rest grid1) (rest grid2)))))
+
 (defn valid-solution? [solution initial-grid]
-  false)
+  (and (no-zeros? solution) (matches? solution initial-grid)))
 
 
 (deftest parsing
